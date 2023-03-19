@@ -1,5 +1,6 @@
 import {model} from "../domain/Context";
 import Checkbox from "./Checkbox";
+import "../styles.scss";
 
 export default function ColumnPicker() {
     const [{columns},] = model.useState("file");

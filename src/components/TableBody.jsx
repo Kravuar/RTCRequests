@@ -24,7 +24,7 @@ export default function TableBody({rows}) {
                 <tbody>
                 {
                     rows.map((row, index) =>
-                        <tr className="row" onClick={() => onClick(index)} key={index} style={{backgroundColor: statusColor(row[config.statusColumn])}}>
+                        <tr onClick={() => onClick(index)} key={index} style={{backgroundColor: statusColor(row[config.statusColumn])}}>
                             {showColumns.map((col, idx) => <td key={row[col] + idx}>{row[col]}</td>)}
                         </tr>
                     )
