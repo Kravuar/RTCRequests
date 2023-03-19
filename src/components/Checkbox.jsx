@@ -4,7 +4,7 @@ export default function Checkbox({label, selected, onChange}) {
     const id = useId();
 
     return (
-        <li className='list-group-item'>
+        <li className='list-group-item dropdown-item'>
             <div className='m-1 form-check'>
                 <input className="form-check-input" type="checkbox" autoComplete="off" id={id} checked={selected}
                        onChange={e => onChange(e.target.checked)}

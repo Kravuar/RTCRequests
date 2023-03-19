@@ -10,18 +10,20 @@ export default function Input() {
     const alert = useAlert();
 
     const onDrop = useCallback(async (files) => {
+        console.time("loading")
         const parsed = await xlsxBadParser(files[0]);
         const latest = filterLatest(parsed.rows);
         model.setState("latest", latest);
         model.setState("file", parsed);
         alert.success("Файл успешно загружен.");
+        console.timeEnd("loading");
         navigate("/main");
     }, [alert, navigate]);
 
     const {getRootProps, getInputProps} = useDropzone({onDrop});
 
     return (
-        <div {...getRootProps({className: 'dropzone'})} style={{width: "100%", height: "100%"}}>
+        <div {...getRootProps({className: "dropzone my-4"})} >
             <label className="form-label" htmlFor="fileInput">
                 Загрузите .XLSX файл.
             </label>

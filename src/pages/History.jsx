@@ -11,8 +11,8 @@ export default function History() {
                         .sort((a, b) => new Date(a[config.dateColumn]) - new Date(b[config.dateColumn]));
 
     return (
-        <div className="container">
-            <h1 >Заявка №{id}</h1>
+        <div className="container shadow my-4 px-2 py-2">
+            <h1>Заявка №{id}</h1>
             <ColumnPicker/>
             <TableBody rows={history}/>
         </div>

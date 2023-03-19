@@ -11,26 +11,25 @@ export default function TableBody({rows}) {
         navigate(`/history/${id}`);
     }
 
-    return(
-        <div>
-            <table className="table table-bordered table-primary">
-                <thead>
-                <tr>
-                    {
-                        showColumns.map((col, idx) => <td key={idx} className='h6'>{col}</td>)
-                    }
-                </tr>
-                </thead>
-                <tbody>
+    return (
+        <table className="table table-bordered table-primary my-4">
+            <thead>
+            <tr>
                 {
-                    rows.map((row, index) =>
-                        <tr onClick={() => onClick(index)} key={index} style={{backgroundColor: statusColor(row[config.statusColumn])}}>
-                            {showColumns.map((col, idx) => <td key={row[col] + idx}>{row[col]}</td>)}
-                        </tr>
-                    )
+                    showColumns.map((col, idx) => <td key={idx} className='h6'>{col}</td>)
                 }
-                </tbody>
-            </table>
-        </div>
+            </tr>
+            </thead>
+            <tbody>
+            {
+                rows.map((row, index) =>
+                    <tr onClick={() => onClick(index)} key={index}
+                        style={{backgroundColor: statusColor(row[config.statusColumn])}}>
+                        {showColumns.map((col, idx) => <td key={row[col] + idx}>{row[col]}</td>)}
+                    </tr>
+                )
+            }
+            </tbody>
+        </table>
     );
 }

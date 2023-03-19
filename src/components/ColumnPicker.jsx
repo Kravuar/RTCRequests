@@ -1,10 +1,12 @@
 import {model} from "../domain/Context";
 import Checkbox from "./Checkbox";
 import "../styles.scss";
+import {useState} from "react";
 
 export default function ColumnPicker() {
     const [{columns},] = model.useState("file");
     const [showColumns, setShowColumns] = model.useState("showColumns");
+    const [filter, setFilter] = useState("");
 
     const updateShowColumns = (column, state) => {
         let newState = [...showColumns];
@@ -23,16 +25,23 @@ export default function ColumnPicker() {
 
     return (
         <div className="btn-group">
-            <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+            <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    data-bs-auto-close="false" aria-expanded="false">
                 Колонки
             </button>
             <ul className="dropdown-menu">
-                <ul className="list-group overflow-scroll" style={{maxHeight: 300}}>
+                <input type='text' placeholder='Колонки' onChange={e => setFilter(e.target.value)}
+                       value={filter}/>
+                <ul className="list-group overflow-scroll">
                     {
-                            columns.map(column =>
-                                <Checkbox key={column} label={column} column={column} selected={isSelected(column)}
-                                                    onChange={state => updateShowColumns(column, state)}/>
-                            )
+                        (filter === ""
+                                ? columns
+                                : columns.filter(column => column.toLowerCase().includes(filter.toLowerCase()))
+                                    .map(column => <Checkbox key={column} label={column} column={column}
+                                                             selected={isSelected(column)}
+                                                             onChange={state => updateShowColumns(column, state)}/>
+                                    )
+                        )
                     }
                 </ul>
             </ul>
