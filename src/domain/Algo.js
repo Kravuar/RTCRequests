@@ -1,5 +1,6 @@
 import * as XLSX from "xlsx";
 import {config, defaultValues} from "./Context";
+import Fuse from "fuse.js";
 
 export const xlsxBadParser = (file) => {
     return new Promise((resolve, reject) => {
@@ -71,6 +72,16 @@ export const specialSearches = {
         }
 
         return result;
+    },
+    findByName: (rows, name) => {
+        const fuse = new Fuse(rows, {
+            keys: ['Клиент*'],
+            shouldSort: true,
+            ignoreLocation: true,
+            threshold: 0.3
+        });
+        const result = fuse.search(name)
+        return result.map(res => res.item)
     }
 }
 

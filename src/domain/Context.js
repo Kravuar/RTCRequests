@@ -6,9 +6,10 @@ export const config = {
     dateColumn: "Дата входа заявки в статус",
     idColumn: "Номер заявки",
     statusColumn: "Статус",
-    specialSearchParams: new Set(["Застоявшиеся заявки"]),
+    specialSearchParams: new Set(["Застоявшиеся заявки", "Клиент"]),
     specialSearchMapping: {
-        "Застоявшиеся заявки": specialSearches.findExpired
+        "Застоявшиеся заявки": specialSearches.findExpired,
+        "Клиент": specialSearches.findByName
     },
     searchParams: [
         {
@@ -22,6 +23,10 @@ export const config = {
         {
             name: "Застоявшиеся заявки",
             placeholder: "Дней застоя..."
+        },
+        {
+            name: "Клиент",
+            placeholder: "Наименование клиента..."
         }
     ],
     statusStates: {
