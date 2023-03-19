@@ -1,10 +1,15 @@
 import { createStore } from "state-pool";
+import {specialSearches} from "./Algo";
 
 export const config = {
     nDaysForExpired: 5,
     dateColumn: "Дата входа заявки в статус",
     idColumn: "Номер заявки",
     statusColumn: "Статус",
+    specialSearchParams: new Set(["Застоявшиеся заявки"]),
+    specialSearchMapping: {
+        "Застоявшиеся заявки": specialSearches.findExpired
+    },
     searchParams: [
         {
             name: "Номер заявки",
@@ -17,10 +22,6 @@ export const config = {
         {
             name: "Застоявшиеся заявки",
             placeholder: "Дней застоя..."
-        },
-        {
-            name: "Менеджер",
-            placeholder: "ФИО или ID..."
         }
     ],
     statusStates: {
@@ -43,7 +44,8 @@ export const config = {
 }
 
 export const defaultValues = {
-    columns: ["Номер заявки", "ИНН", "Статус", "Дата входа заявки в статус"]
+    columns: ["Номер заявки", "ИНН", "Статус", "Дата входа заявки в статус"],
+    rowColor: "grey"
 }
 
 export const model = createStore();

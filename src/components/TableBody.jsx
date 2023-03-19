@@ -1,7 +1,9 @@
 import Row from "./Row";
-import {model} from "../domain/Context";
+import {config, model} from "../domain/Context";
+import {useNavigate} from "react-router-dom";
 
 export default function TableBody({rows}) {
+    const navigate = useNavigate();
     const [{columns},] = model.useState("file");
     const [showColumns,] = model.useState("showColumns");
     const indices = showColumns.map(column => columns.indexOf(column));
@@ -11,7 +13,8 @@ export default function TableBody({rows}) {
     }
 
     const onClick = (index) => {
-
+        const id = rows[index][config.idColumn];
+        navigate(`/history/${id}`);
     }
 
     return(

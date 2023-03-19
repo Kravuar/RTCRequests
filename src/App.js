@@ -15,7 +15,7 @@ function App() {
               <Route exact path="/" element={<Navigate replace to="/upload"/>}/>
               <Route exact path="/upload" element={<Input/>}/>
               <Route exact path="/main" element={<Main/>}/>
-              <Route exact path="/history" element={<History/>}/>
+              <Route exact path="/history/:id" element={<History/>}/>
             </Routes>
         </BrowserRouter>
       </>
