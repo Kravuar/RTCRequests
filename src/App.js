@@ -2,7 +2,7 @@ import './App.css';
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import Input from "./pages/Input";
 import History from "./pages/History";
-import Contents from "./pages/Main";
+import Main from "./pages/Main";
 
 function App() {
   return (
@@ -14,8 +14,8 @@ function App() {
             <Routes>
               <Route exact path="/" element={<Navigate replace to="/upload"/>}/>
               <Route exact path="/upload" element={<Input/>}/>
-              <Route exact path="/contents" element={<Contents/>}/>
-              <Route exact path="/history/:searchParam" element={<History/>}/>
+              <Route exact path="/main" element={<Main/>}/>
+              <Route exact path="/history" element={<History/>}/>
             </Routes>
         </BrowserRouter>
       </>

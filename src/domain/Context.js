@@ -22,8 +22,9 @@ export const config = {
 }
 
 export const defaultValues = {
-    searchParam: config.searchParams[0]
+    columns: ["Номер заявки", "ИНН", "Статус", "Дата входа заявки в статус"]
 }
 
 export const model = createStore();
-// model.setState(, );
+model.setState('searchParam', config.searchParams[0]);
+model.setState('showColumns', defaultValues.columns);
