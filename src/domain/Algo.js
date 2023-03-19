@@ -1,4 +1,5 @@
 import * as XLSX from "xlsx";
+import {config} from "./Context";
 
 export const xlsxBadParser = (file) => {
     return new Promise((resolve, reject) => {
@@ -27,4 +28,41 @@ export const xlsxBadParser = (file) => {
         }
         reader.readAsArrayBuffer(file);
     })
+}
+
+export const filterLatest = (rows) => {
+    const latest = new Map();
+    const current_date = new Date();
+
+    for (const row of rows.filter(row => config.statusStates.liquid.items.has(row[config.statusColumn]))) {
+        const id = row[config.idColumn]
+        const new_date = new Date(row[config.dateColumn]);
+
+        if (!latest.has(id))
+            latest.set(id, row)
+        else {
+            const latest_date = latest.get(id)[config.dateColumn];
+            if (new Date(latest_date) < new_date)
+                latest.set(id, row);
+        }
+    }
+
+    const result = []
+    for(const row of latest.values()) {
+        const new_date = new Date(row[config.dateColumn])
+        const difference_days = differenceInDays(new_date, current_date);
+        if (difference_days >= config.nDaysForExpired)
+            result.push(row);
+    }
+
+    return result;
+}
+
+export const search = (rows, searchParam, searchValue) => {
+
+}
+
+const differenceInDays = (date1, date2) => {
+    const diff = Math.abs(new Date(date1) - new Date(date2));
+    return Math.ceil(diff / 1000 / 60 / 60 / 24);
 }
