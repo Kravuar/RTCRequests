@@ -1,16 +1,10 @@
-import Row from "./Row";
 import {config, model} from "../domain/Context";
 import {useNavigate} from "react-router-dom";
+import {statusColor} from "../domain/Algo";
 
 export default function TableBody({rows}) {
     const navigate = useNavigate();
-    const [{columns},] = model.useState("file");
     const [showColumns,] = model.useState("showColumns");
-    const indices = showColumns.map(column => columns.indexOf(column));
-
-    const filterRow = (row) => {
-        return row.filter((_, index) => indices.includes(index));
-    }
 
     const onClick = (index) => {
         const id = rows[index][config.idColumn];
@@ -23,14 +17,17 @@ export default function TableBody({rows}) {
                 <thead>
                 <tr>
                     {
-                        showColumns.map(col => <td className='h6'>{col}</td>)
+                        showColumns.map((col, idx) => <td key={idx} className='h6'>{col}</td>)
                     }
                 </tr>
                 </thead>
                 <tbody>
                 {
                     rows.map((row, index) =>
-                        <Row row={filterRow(row)} onClick={() => onClick(index)}/>)
+                        <tr className="row" onClick={() => onClick(index)} key={index} style={{backgroundColor: statusColor(row[config.statusColumn])}}>
+                            {showColumns.map((col, idx) => <td key={row[col] + idx}>{row[col]}</td>)}
+                        </tr>
+                    )
                 }
                 </tbody>
             </table>

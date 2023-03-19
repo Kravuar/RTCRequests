@@ -29,7 +29,7 @@ export default function Input() {
                             type="file"
                             className="form-control"
                             onChange={handleFileChange}
-                            accept="application/vnd.ms-excel"
+                            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                         />
                     </div>
                 </div>

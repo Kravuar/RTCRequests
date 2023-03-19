@@ -46,10 +46,12 @@ export const filterLatest = (rows) => {
         }
     }
 
-    return latest.values();
+    return Array.from(latest.values());
 }
 
 export const search = (rows, searchParam, searchValue) => {
+    if (searchValue === "")
+        return [];
     if (!config.specialSearchParams.has(searchParam))
         return rows.filter(row => row[searchParam] === searchValue);
 

@@ -6,7 +6,8 @@ export default function ColumnPicker() {
     const [showColumns, setShowColumns] = model.useState("showColumns");
 
     const updateShowColumns = (column, state) => {
-        let newState = showColumns;
+        let newState = [...showColumns];
+
         if (state)
             newState.push(column);
         else
@@ -28,7 +29,7 @@ export default function ColumnPicker() {
                 <ul className="list-group overflow-scroll" style={{maxHeight: 300}}>
                     {
                             columns.map(column =>
-                                <Checkbox key={column} column={column} selected={isSelected(column)}
+                                <Checkbox key={column} label={column} column={column} selected={isSelected(column)}
                                                     onChange={state => updateShowColumns(column, state)}/>
                             )
                     }

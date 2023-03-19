@@ -1,5 +1,5 @@
 import Searcher from "../components/Searcher";
-import {Table} from "react-bootstrap";
+import Table from "../components/Table";
 
 export default function Main() {
 
